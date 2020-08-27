@@ -12,6 +12,55 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <h1>Browser Template</h1>
+      <h1>Welcome to LIFE CHANGING Tic-Tac-Toe</h1>
+
+      <input type='button' id-'logout' value='Log Me Out!'>
+
+      <form id='new-user-form'>
+        <fieldset>
+          <legend>New User Registration:</legend>
+
+            <label for='new-user-email'>Email</label>
+            <input id='new-user-email' type='text' placeholder='email' name='credentials[email]'>
+
+            <label for='new-user-password'>Password</label>
+            <input id='new-user-password' type='password' placeholder='password' name='credentials[password]'>
+
+            <label for='new-user-password_confirmation'>Confirm Password</label>
+            <input id='new-user-password_confirmation' type='password' placeholder='confirm password' name='credentials[password_confirmation]'>
+
+            <input type='submit' value='Sign In'>
+        </fieldset>
+      </form>
+
+      <form id='reg-user-form'>
+        <fieldset>
+          <legend>Registered User Sign In:</legend>
+
+            <label for='reg-user-email'>Email</label>
+            <input id='reg-user-email' type='text' placeholder='email' name='credentials[email]'>
+
+            <label for='reg-user-password'>Password</label>
+            <input id='reg-user-password' type='password' placeholder='password' name='credentials[password]'>
+
+            <label for='reg-user-password_confirmation'>Confirm Password</label>
+            <input id='reg-user-password_confirmation' type='password' placeholder='confirm password' name='credentials[password_confirmation]'>
+
+            <input type='submit' value='Sign In'>
+        </fieldset>
+
+        <form id='change-password-form'>
+          <fieldset>
+            <legend>Change Password:</legend>
+
+              <label for='change-password-password'>Password</label>
+              <input id='change-password-password' type='password' placeholder='password' name='credentials[password]'>
+
+              <label for='change-password-password_confirmation'>Confirm Password</label>
+              <input id='change-password-password_confirmation' type='password' placeholder='confirm password' name='credentials[password_confirmation]'>
+
+              <input type='submit' value='Sign In'>
+          </fieldset>
+      </form>
     </body>
 </html>
