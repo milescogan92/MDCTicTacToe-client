@@ -5,10 +5,10 @@ URL_PATH="/change-password"
 curl "${API}${URL_PATH}" \
   --include \
   --request PATCH \
-  --header "Authorization: Token token=e2d6901029099557b2ad4e2f3130f2e8" \
+  --header "Authorization: Token token=925273102235a0c8a59d4facb7957f2e" \
   --header "Content-Type: application/json" \
   --data '{
-    "credentials": {
+    "passwords": {
       "old": "'"${OLDPW}"'",
       "new": "'"${NEWPW}"'"
     }
