@@ -11,4 +11,5 @@ const theEvents = require('./events')
 $(() => {
   // your JS code goes here
   $('#new-user-form').on('submit', theEvents.onNewUser)
+  $('#reg-user-form').on('submit', theEvents.onRegUser)
 })

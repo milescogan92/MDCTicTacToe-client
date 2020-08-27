@@ -18,6 +18,20 @@ const onNewUser = function (event) {
     .catch(ui.onNewUserFailure)
 }
 
+const onRegUser = function (event) {
+  event.preventDefault()
+
+  const form = event.target
+
+  const data = getFormFields(form)
+  console.log('MDC data from onRegUser is ' + data)
+
+  api.regUser(data)
+    .then(ui.onRegUserSuccess)
+    .catch(ui.onRegUserFailure)
+}
+
 module.exports = {
-  onNewUser: onNewUser
+  onNewUser: onNewUser,
+  onRegUser: onRegUser
 }
