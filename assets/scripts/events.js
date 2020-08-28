@@ -31,7 +31,21 @@ const onRegUser = function (event) {
     .catch(ui.onRegUserFailure)
 }
 
+const onChangePassword = function (event) {
+  event.preventDefault()
+
+  const form = event.target
+
+  const data = getFormFields(form)
+  console.log('MDC data from onChangePassword is', data)
+
+  api.changePassword(data)
+    .then(ui.onChangePasswordSuccess)
+    .catch(ui.onChangePasswordFailure)
+}
+
 module.exports = {
   onNewUser: onNewUser,
-  onRegUser: onRegUser
+  onRegUser: onRegUser,
+  onChangePassword: onChangePassword
 }

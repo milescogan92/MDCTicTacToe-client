@@ -22,7 +22,22 @@ const regUser = function (data) {
   })
 }
 
+const changePassword = function (data) {
+
+  console.log('changePassword data is', data)
+
+  return $.ajax({
+    url: config.apiUrl + '/change-password',
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Bearer ' + store.user.token
+    },
+    data: data
+  })
+}
+
 module.exports = {
   newUser: newUser,
-  regUser: regUser
+  regUser: regUser,
+  changePassword: changePassword
 }

@@ -26,9 +26,19 @@ const onRegUserFailure = function (error) {
   $('#reg-user-form').trigger('reset')
 }
 
+const onChangePasswordSuccess = function () {
+  $('#change-password-message').text('Password changed successfully!')
+}
+
+const onChangePasswordFailure = function () {
+  $('#change-password-message').text('Error, could not change password.')
+}
+
 module.exports = {
   onNewUserSuccess: onNewUserSuccess,
   onNewUserFailure: onNewUserFailure,
   onRegUserSuccess: onRegUserSuccess,
-  onRegUserFailure: onRegUserFailure
+  onRegUserFailure: onRegUserFailure,
+  onChangePasswordSuccess: onChangePasswordSuccess,
+  onChangePasswordFailure: onChangePasswordFailure
 }

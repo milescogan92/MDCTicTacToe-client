@@ -50,18 +50,35 @@
           </fieldset>
         </form>
 
+        <p id='change-password-message'></p>
         <form id='change-password-form'>
           <fieldset>
             <legend>Change Password:</legend>
 
-              <label for='change-password-password'>Password</label>
-              <input id='change-password-password' type='password' placeholder='password' name='credentials[password]'>
+              <label for='change-password-password'>Old Password</label>
+              <input id='change-password-password' type='password' placeholder='old password' name='passwords[old]'>
 
-              <label for='change-password-password_confirmation'>Confirm Password</label>
-              <input id='change-password-password_confirmation' type='password' placeholder='confirm password' name='credentials[password_confirmation]'>
+              <label for='change-password-password_confirmation'>New Password</label>
+              <input id='change-password-password_confirmation' type='password' placeholder='new password' name='passwords[new]'>
 
               <input type='submit' value='Change Password'>
           </fieldset>
       </form>
+
+<!-- code along here for board! -->
+      <div class='container'>
+        <div class='row board h-100'>
+          <div class='col-4 box'></div>
+          <div class='col-4 box'></div>
+          <div class='col-4 box'></div>
+          <div class='col-4 box'></div>
+          <div class='col-4 box'></div>
+          <div class='col-4 box'></div>
+          <div class='col-4 box'></div>
+          <div class='col-4 box'></div>
+          <div class='col-4 box'></div>
+        </div>
+      </div>
+
     </body>
 </html>

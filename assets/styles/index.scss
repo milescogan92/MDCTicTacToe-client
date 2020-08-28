@@ -1,1 +1,55 @@
 @import '~bootstrap/scss/bootstrap';
+
+.container {
+  //set the board container to take up 100% of viewport height
+  //in this case, thats the height of the browser
+  height: 100vh;
+}
+
+.board {
+  //set the max height and the min width of the board
+  //100vh - 100% of the viewport height
+  //use a method called 'calc' to subtract a lil space around each side
+  max-height: calc(100vh - 100px);
+  min-width: calc(100vh - 100px);
+
+  //setting margin to auto will make the left/right margins the same size
+  //which effectively centers the elemtn
+  margin: auto;
+
+  //add background to board
+  background-color: blue;
+  background-size: cover;
+}
+
+.box {
+
+  background-color: red;
+  //set the minimum height for each box to be a third of the parent's width
+  // (board's height)
+  //the calc method will take 100% of the parent's height and divide it by 3
+  min-height: calc(100% / 3);
+
+  display: flex;
+  //we want borders of the right and bottom of each box for tic tac toe (think about it)
+  border-right: 3px solid black;
+  border-bottom: 3px solid black;
+
+  //select the 3 right boxes using ':nth-child'
+  //this will select elements based on their position to their siblings.
+  // use Sass with ampresand below - nest inside the box class. other stuff is reg CSS
+  //then pass ':nth-child()' the value 3n, which will select every third box.
+  &:nth-child(3n) {
+  border-right: 0px;
+  }
+
+  //select the bottom boxes using ':nth-child-last'
+  //this selects elements based on the position COUNTING FROM THE END
+  //'-1 + 3' represents the last three elements among a group of siblings.
+     //this was tough to understand
+  &:nth-last-child(-1n + 3) {
+    border-bottom: 0px;
+  }
+
+
+}
