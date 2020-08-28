@@ -12,14 +12,15 @@ const newUser = function (data) {
 }
 
 const regUser = function (data) {
+
+  console.log('regUser data is', data)
+
   return $.ajax({
     url: config.apiUrl + '/sign-in',
     method: 'POST',
     data: data
   })
 }
-
-
 
 module.exports = {
   newUser: newUser,

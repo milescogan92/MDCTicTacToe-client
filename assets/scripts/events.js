@@ -11,7 +11,7 @@ const onNewUser = function (event) {
   const form = event.target
 
   const data = getFormFields(form)
-  console.log('MDC data from onNewUser is ' + data)
+  console.log('MDC data from onNewUser is', data)
 
   api.newUser(data)
     .then(ui.onNewUserSuccess)
@@ -24,7 +24,7 @@ const onRegUser = function (event) {
   const form = event.target
 
   const data = getFormFields(form)
-  console.log('MDC data from onRegUser is ' + data)
+  console.log('MDC data from onRegUser is ', data)
 
   api.regUser(data)
     .then(ui.onRegUserSuccess)
