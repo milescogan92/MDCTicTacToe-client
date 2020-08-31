@@ -13,4 +13,5 @@ $(() => {
   $('#new-user-form').on('submit', theEvents.onNewUser)
   $('#reg-user-form').on('submit', theEvents.onRegUser)
   $('#change-password-form').on('submit', theEvents.onChangePassword)
+  $('#sign-out-button').on('click', theEvents.onSignOut)
 })

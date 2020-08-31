@@ -36,8 +36,21 @@ const changePassword = function (data) {
   })
 }
 
+const signOut = function () {
+  console.log('signOut function hitting')
+
+  return $.ajax({
+    url: config.apiUrl + '/sign-out',
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Bearer ' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   newUser: newUser,
   regUser: regUser,
-  changePassword: changePassword
+  changePassword: changePassword,
+  signOut: signOut
 }
