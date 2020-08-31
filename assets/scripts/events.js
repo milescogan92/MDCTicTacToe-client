@@ -4,6 +4,7 @@ const getFormFields = require('./../../lib/get-form-fields')
 const api = require('./api')
 const ui = require('./ui')
 
+const playerX = 'X'
 
 const onNewUser = function (event) {
   event.preventDefault()
@@ -45,16 +46,36 @@ const onChangePassword = function (event) {
 }
 
 const onSignOut = function (event) {
-  event.preventDefault()
+  event.preventDefault() // extraneous
+
+  console.log('onSignOutfired!')
 
   api.signOut()
     .then(ui.onSignOutSuccess)
     .catch(ui.onSignOutFailure)
 }
 
+const onBeginGame = function () {
+  event.preventDefault() // extraneous
+  console.log('onBeginGame is hitting!')
+
+  api.beginGame()
+    .then(ui.onBeginGameSuccess)
+    .catch(ui.onBeginGameFailure)
+}
+
+const onBoxClick = function (event) {
+  console.log('onBoxClick is hitting!')
+  console.log(event.target.id)
+
+  $(`#${event.target.id}`).text(playerX)
+}
+
 module.exports = {
   onNewUser: onNewUser,
   onRegUser: onRegUser,
   onChangePassword: onChangePassword,
-  onSignOut: onSignOut
+  onSignOut: onSignOut,
+  onBeginGame: onBeginGame,
+  onBoxClick: onBoxClick
 }

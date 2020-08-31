@@ -48,9 +48,23 @@ const signOut = function () {
   })
 }
 
+const beginGame = function () {
+  console.log('beginGame hitting!')
+
+  return $.ajax({
+    url: config.apiUrl + '/games',
+    method: 'POST',
+    headers: {
+      Authorization: 'Bearer ' + store.user.token
+    },
+    data: '{}'
+  })
+}
+
 module.exports = {
   newUser: newUser,
   regUser: regUser,
   changePassword: changePassword,
-  signOut: signOut
+  signOut: signOut,
+  beginGame: beginGame
 }

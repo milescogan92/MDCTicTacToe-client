@@ -42,6 +42,14 @@ const onSignOutFailure = function () {
   $('#sign-out-message').text('Error, could not sign you out. Try again.')
 }
 
+const onBeginGameSuccess = function () {
+  $('#begin-game-message').text('Game has begun!')
+}
+
+const onBeginGameFailure = function () {
+  $('#begin-game-message').text('Error, game has not begun.  Try again.')
+}
+
 module.exports = {
   onNewUserSuccess: onNewUserSuccess,
   onNewUserFailure: onNewUserFailure,
