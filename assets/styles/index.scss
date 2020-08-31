@@ -18,13 +18,13 @@
   margin: auto;
 
   //add background to board
-  background-color: blue;
+  background-color: url('public/cat.jpg');
   background-size: cover;
 }
 
 .box {
 
-  background-color: red;
+  background: white;
   //set the minimum height for each box to be a third of the parent's width
   // (board's height)
   //the calc method will take 100% of the parent's height and divide it by 3
@@ -32,6 +32,17 @@
 
   display: flex;
   //we want borders of the right and bottom of each box for tic tac toe (think about it)
+
+  justify-content: center;
+
+  align-items: center;
+
+  font-size: 15vh;
+
+  text-shadow: 2px 2px rgba(0, 0, 0, .25);
+
+  user-select: none;
+
   border-right: 3px solid black;
   border-bottom: 3px solid black;
 
@@ -51,5 +62,8 @@
     border-bottom: 0px;
   }
 
-
+  &:hover {
+    background-color: LightSteelBlue;
+    cursor: pointer;
+  }
 }
