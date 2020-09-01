@@ -58,5 +58,7 @@ module.exports = {
   onChangePasswordSuccess: onChangePasswordSuccess,
   onChangePasswordFailure: onChangePasswordFailure,
   onSignOutSuccess: onSignOutSuccess,
-  onSignOutFailure: onSignOutFailure
+  onSignOutFailure: onSignOutFailure,
+  onBeginGameSuccess: onBeginGameSuccess,
+  onBeginGameFailure: onBeginGameFailure
 }
