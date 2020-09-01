@@ -42,8 +42,12 @@ const onSignOutFailure = function () {
   $('#sign-out-message').text('Error, could not sign you out. Try again.')
 }
 
-const onBeginGameSuccess = function () {
+const onBeginGameSuccess = function (response) {
+  console.log(response, 'onBeginGameSuccess is hitting!')
   $('#begin-game-message').text('Game has begun!')
+  store.game = response.game
+  console.log(store.game)
+
 }
 
 const onBeginGameFailure = function () {

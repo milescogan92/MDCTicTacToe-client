@@ -14,6 +14,7 @@ $(() => {
   $('#change-password-form').on('submit', theEvents.onChangePassword)
   $('#sign-out-button').on('click', theEvents.onSignOut)
   $('#begin-game-button').on('click', theEvents.onBeginGame)
+  $('#box0').on('click', theEvents.onBoxClick)
   $('#box1').on('click', theEvents.onBoxClick)
   $('#box2').on('click', theEvents.onBoxClick)
   $('#box3').on('click', theEvents.onBoxClick)
@@ -22,5 +23,4 @@ $(() => {
   $('#box6').on('click', theEvents.onBoxClick)
   $('#box7').on('click', theEvents.onBoxClick)
   $('#box8').on('click', theEvents.onBoxClick)
-  $('#box9').on('click', theEvents.onBoxClick)
 })

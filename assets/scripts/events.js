@@ -3,6 +3,7 @@
 const getFormFields = require('./../../lib/get-form-fields')
 const api = require('./api')
 const ui = require('./ui')
+const store = require('./store')
 
 const onNewUser = function (event) {
   event.preventDefault()
@@ -63,12 +64,24 @@ const onBeginGame = function () {
 }
 
 let currentPlayer = 'X'
+store.currentPlayer = currentPlayer
+
 
 const onBoxClick = function (event) {
+
+  const clickedCell = event.target
+
   console.log('onBoxClick is hitting!')
-  console.log(event.target.id)
+  console.log(clickedCell)
+
+  const clickedCellIndex = $(clickedCell).attr('data-cell-index')
+
+  console.log(clickedCellIndex)
 
   $(`#${event.target.id}`).text(currentPlayer)
+
+  store.game.cells[clickedCellIndex] = currentPlayer
+  console.log(store.game)
 
   if (currentPlayer === 'X') {
     currentPlayer = '0'
