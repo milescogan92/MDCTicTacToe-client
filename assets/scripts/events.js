@@ -4,8 +4,6 @@ const getFormFields = require('./../../lib/get-form-fields')
 const api = require('./api')
 const ui = require('./ui')
 
-const playerX = 'X'
-
 const onNewUser = function (event) {
   event.preventDefault()
 
@@ -64,11 +62,19 @@ const onBeginGame = function () {
     .catch(ui.onBeginGameFailure)
 }
 
+let currentPlayer = 'X'
+
 const onBoxClick = function (event) {
   console.log('onBoxClick is hitting!')
   console.log(event.target.id)
 
-  $(`#${event.target.id}`).text(playerX)
+  $(`#${event.target.id}`).text(currentPlayer)
+
+  if (currentPlayer === 'X') {
+    currentPlayer = '0'
+  } else {
+    currentPlayer = 'X'
+  }
 }
 
 module.exports = {
