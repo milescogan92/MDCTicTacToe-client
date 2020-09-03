@@ -47,7 +47,6 @@ const onBeginGameSuccess = function (response) {
   $('#begin-game-message').text('Game has begun!')
   store.game = response.game
   console.log(store.game)
-
 }
 
 const onBeginGameFailure = function () {

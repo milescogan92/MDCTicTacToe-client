@@ -78,15 +78,20 @@ const onBoxClick = function (event) {
 
   console.log(clickedCellIndex)
 
-  $(`#${event.target.id}`).text(currentPlayer)
+  if ($(`#${event.target.id}`).text() === '') {
+    $(`#${event.target.id}`).text(currentPlayer)
 
-  store.game.cells[clickedCellIndex] = currentPlayer
-  console.log(store.game)
+    store.game.cells[clickedCellIndex] = currentPlayer
 
-  if (currentPlayer === 'X') {
-    currentPlayer = '0'
+
+    if (currentPlayer === 'X') {
+      currentPlayer = '0'
+    } else {
+      currentPlayer = 'X'
+    }
+
   } else {
-    currentPlayer = 'X'
+    return
   }
 }
 
