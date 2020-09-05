@@ -54,11 +54,13 @@ const onSignOut = function (event) {
     .catch(ui.onSignOutFailure)
 }
 
-const onBeginGame = function () {
+const onBeginGame = function (token) {
   event.preventDefault() // extraneous
   console.log('onBeginGame is hitting!')
-
-  api.beginGame()
+  currentPlayer = 'X'
+  //gameOver = false - //took this line from Aidan, should work for me. but doesnt
+  //board = ['', '', '', '', '', '', '', '', ''] - //same as above line
+  api.beginGame() //added store.user.token on 9/5/2020 in this.
     .then(ui.onBeginGameSuccess)
     .catch(ui.onBeginGameFailure)
 }
@@ -74,9 +76,9 @@ const onViewGames = function () {
 
 let currentPlayer = 'X'
 store.currentPlayer = currentPlayer
-
-const gameArray = ['','','','','','','','','']
-
+//let gameOver = false //added from Aidan's code
+let board = ['', '', '', '', '', '', '', '', '']
+//let gameOver = false - this line caused errors
 const onBoxClick = function (event) {
   const clickedCell = event.target
 
@@ -90,8 +92,8 @@ const onBoxClick = function (event) {
   if ($(`#${event.target.id}`).text() === '') {
     $(`#${event.target.id}`).text(currentPlayer)
 
-    gameArray[clickedCellIndex] = currentPlayer
-    console.log(gameArray)
+    board[clickedCellIndex] = currentPlayer
+    console.log(board)
 
     if (currentPlayer === 'X') {
       currentPlayer = '0'
@@ -101,8 +103,6 @@ const onBoxClick = function (event) {
   }
 }
 
-
-
 module.exports = {
   onNewUser: onNewUser,
   onRegUser: onRegUser,
@@ -111,5 +111,4 @@ module.exports = {
   onBeginGame: onBeginGame,
   onViewGames: onViewGames,
   onBoxClick: onBoxClick
-
 }
