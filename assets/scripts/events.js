@@ -63,12 +63,21 @@ const onBeginGame = function () {
     .catch(ui.onBeginGameFailure)
 }
 
+const onViewGames = function () {
+  event.preventDefault()
+  console.log('onViewGames is hitting!')
+
+  api.viewGames()
+    .then(ui.onViewGamesSuccess)
+    .catch(ui.onViewGamesFailure)
+}
+
 let currentPlayer = 'X'
 store.currentPlayer = currentPlayer
 
+const gameArray = ['','','','','','','','','']
 
 const onBoxClick = function (event) {
-
   const clickedCell = event.target
 
   console.log('onBoxClick is hitting!')
@@ -81,19 +90,18 @@ const onBoxClick = function (event) {
   if ($(`#${event.target.id}`).text() === '') {
     $(`#${event.target.id}`).text(currentPlayer)
 
-    store.game.cells[clickedCellIndex] = currentPlayer
-
+    gameArray[clickedCellIndex] = currentPlayer
+    console.log(gameArray)
 
     if (currentPlayer === 'X') {
       currentPlayer = '0'
     } else {
       currentPlayer = 'X'
     }
-
-  } else {
-    return
   }
 }
+
+
 
 module.exports = {
   onNewUser: onNewUser,
@@ -101,5 +109,7 @@ module.exports = {
   onChangePassword: onChangePassword,
   onSignOut: onSignOut,
   onBeginGame: onBeginGame,
+  onViewGames: onViewGames,
   onBoxClick: onBoxClick
+
 }

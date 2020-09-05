@@ -28,10 +28,12 @@ const onRegUserFailure = function (error) {
 
 const onChangePasswordSuccess = function () {
   $('#change-password-message').text('Password changed successfully!')
+  $('#change-password-form').trigger('reset')
 }
 
 const onChangePasswordFailure = function () {
   $('#change-password-message').text('Error, could not change password.')
+  $('#change-password-form').trigger('reset')
 }
 
 const onSignOutSuccess = function () {
@@ -51,6 +53,12 @@ const onBeginGameSuccess = function (response) {
 
 const onBeginGameFailure = function () {
   $('#begin-game-message').text('Error, game has not begun.  Try again.')
+}
+
+const onViewGamesSuccess = function (response) {
+}
+
+const onViewGamesFailure = function (error) {
 }
 
 module.exports = {

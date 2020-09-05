@@ -12,7 +12,6 @@ const newUser = function (data) {
 }
 
 const regUser = function (data) {
-
   console.log('regUser data is', data)
 
   return $.ajax({
@@ -23,7 +22,6 @@ const regUser = function (data) {
 }
 
 const changePassword = function (data) {
-
   console.log('changePassword data is', data)
 
   return $.ajax({
@@ -61,10 +59,46 @@ const beginGame = function () {
   })
 }
 
+const viewGames = function () {
+  console.log('viewGames hitting!')
+
+  return $.ajax({
+    url: config.apiUrl + '/games',
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer ' + store.user.token
+    },
+    data: '{}'
+  })
+}
+
+const updateGame = function (index, value, over) {
+  console.log('updateGame hitting!')
+
+  return $.ajax({
+    url: config.apiUrl + '/games/:id',
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Bearer ' + store.user.token
+    },
+    data: {
+      game: {
+        cell: {
+          index: index,
+          value: value
+        },
+        over: over
+      }
+    }
+  })
+}
+
 module.exports = {
   newUser: newUser,
   regUser: regUser,
   changePassword: changePassword,
   signOut: signOut,
-  beginGame: beginGame
+  beginGame: beginGame,
+  viewGames: viewGames,
+  updateGame: updateGame
 }
