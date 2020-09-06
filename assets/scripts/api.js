@@ -72,7 +72,7 @@ const viewGames = function () {
   })
 }
 
-const updateGame = function (index, value, boolean) {
+const updateGame = function (index, value, over) {
   console.log('updateGame hitting!')
 
   return $.ajax({
@@ -87,7 +87,7 @@ const updateGame = function (index, value, boolean) {
           index: index,
           value: value
         },
-        over: boolean
+        over: over
       }
     }
   })

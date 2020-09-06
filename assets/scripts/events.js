@@ -57,7 +57,6 @@ const onSignOut = function (event) {
 const onBeginGame = function (token) {
   event.preventDefault() // extraneous
   console.log('onBeginGame is hitting!')
-  currentPlayer = 'X'
   //gameOver = false - //took this line from Aidan, should work for me. but doesnt
   //board = ['', '', '', '', '', '', '', '', ''] - //same as above line
   api.beginGame() //added store.user.token on 9/5/2020 in this.
@@ -80,17 +79,16 @@ store.currentPlayer = currentPlayer
 let board = ['', '', '', '', '', '', '', '', '']
 //let gameOver = false - this line caused errors
 const onBoxClick = function (event) {
-  const clickedCell = event.target
+
 
   console.log('onBoxClick is hitting!')
-  console.log(clickedCell)
 
-  const clickedCellIndex = $(clickedCell).attr('data-cell-index')
+  const clickedCellIndex = $(event.target).attr('data-cell-index')
 
   console.log(clickedCellIndex)
 
-  if ($(`#${event.target.id}`).text() === '') {
-    $(`#${event.target.id}`).text(currentPlayer)
+  if ($(event.target).text() === '') {
+    $(event.target).text(currentPlayer)
 
     board[clickedCellIndex] = currentPlayer
     console.log(board)

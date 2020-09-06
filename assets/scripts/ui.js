@@ -61,6 +61,8 @@ const onViewGamesSuccess = function (response) {
 const onViewGamesFailure = function (error) {
 }
 
+
+
 module.exports = {
   onNewUserSuccess: onNewUserSuccess,
   onNewUserFailure: onNewUserFailure,
