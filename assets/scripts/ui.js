@@ -55,10 +55,21 @@ const onBeginGameFailure = function () {
   $('#begin-game-message').text('Error, game has not begun.  Try again.')
 }
 
+const onUpdateGameSuccess = function (response) {
+  store.game = response.game
+  console.log('onUpdateGameSuccess is hitting ' + response)
+  console.log (store.game)
+}
+
+const onUpdateGameFailure = function (error) {
+  console.log('onUpdateGameFailure... ' + error)
+}
+
 const onViewGamesSuccess = function (response) {
 }
 
 const onViewGamesFailure = function (error) {
+
 }
 
 
@@ -73,5 +84,7 @@ module.exports = {
   onSignOutSuccess: onSignOutSuccess,
   onSignOutFailure: onSignOutFailure,
   onBeginGameSuccess: onBeginGameSuccess,
-  onBeginGameFailure: onBeginGameFailure
+  onBeginGameFailure: onBeginGameFailure,
+  onUpdateGameSuccess: onUpdateGameSuccess,
+  onUpdateGameFailure: onUpdateGameFailure
 }
