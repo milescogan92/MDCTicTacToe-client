@@ -101,12 +101,13 @@ const onBoxClick = function (event) {
   }
 }
 
+
+
 module.exports = {
   onNewUser: onNewUser,
   onRegUser: onRegUser,
   onChangePassword: onChangePassword,
   onSignOut: onSignOut,
   onBeginGame: onBeginGame,
-  onViewGames: onViewGames,
   onBoxClick: onBoxClick
 }
