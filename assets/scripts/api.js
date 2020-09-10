@@ -73,8 +73,7 @@ const viewGames = function () {
 }
 
 const updateGame = function (index, value, over) {
-  console.log('updateGame hitting!')
-
+  console.log(over)
   return $.ajax({
     url: config.apiUrl + '/games/' + store.game._id,
     method: 'PATCH',

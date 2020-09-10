@@ -48,7 +48,6 @@ const onBeginGameSuccess = function (response) {
   console.log(response, 'onBeginGameSuccess is hitting!')
   $('#begin-game-message').text('Game has begun!')
   store.game = response.game
-  console.log(store.game)
 }
 
 const onBeginGameFailure = function () {
@@ -58,7 +57,6 @@ const onBeginGameFailure = function () {
 const onUpdateGameSuccess = function (response) {
   store.game = response.game
   console.log('onUpdateGameSuccess is hitting ' + response)
-  console.log (store.game)
 }
 
 const onUpdateGameFailure = function (error) {

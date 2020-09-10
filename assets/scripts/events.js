@@ -80,21 +80,19 @@ let board = ['', '', '', '', '', '', '', '', '']
 //let gameOver = false - this line caused errors
 const onBoxClick = function (event) {
 let gameEnd = isGameOver(board)
+let target = $(event.target)
 
-  console.log('onBoxClick is hitting!')
+if (gameEnd) {
+  return
+} else {
+  const clickedCellIndex = target.attr('data-cell-index')
 
-  const clickedCellIndex = $(event.target).attr('data-cell-index')
-
-  console.log(clickedCellIndex)
-
-  if ($(event.target).text() === '') {
-    $(event.target).text(currentPlayer)
-
+  if (target.text() === '') {
+    target.text(currentPlayer)
 
     board[clickedCellIndex] = currentPlayer
-    console.log(board)
 
-    api.updateGame(clickedCellIndex, currentPlayer, gameEnd)
+    api.updateGame(clickedCellIndex, currentPlayer, isGameOver(board))
       .then(ui.onUpdateGameSuccess)
       .catch(ui.onUpdateGameFailure)
 
@@ -107,30 +105,16 @@ let gameEnd = isGameOver(board)
 
   else if ($(event.target).text() !== '' && gameEnd === false) {
     $('#wrong-move-msg').text('Nice Move idiot')
-
   }
-
 }
+}
+
 
 //CODE BELOW for game logic and loop is directly attributable to Aiden Kenney, c. 2020 lol
 
+
+
 const isGameOver = function (gameBoard) {
-  // is winning conditions were present, game is over
-  if (isGameWon(gameBoard) === true) {
-    console.log(true)
-    return true
-    // If no winner, but the game board if full it's a tie -- still over
-  } else if (isGameWon(gameBoard) === false && gameBoard.filter(x => x === '').length === 0) {
-    console.log(true)
-    return true
-  } else {
-    console.log(false)
-    return false
-
-  }
-}
-
-const isGameWon = function (gameBoard) {
   if (gameBoard[0] === gameBoard[1] && gameBoard[0] === gameBoard[2] && gameBoard[0] !== '') {
     return true
   } else if (gameBoard[3] === gameBoard[4] && gameBoard[3] === gameBoard[5] && gameBoard[3] !== '') {
@@ -159,6 +143,5 @@ module.exports = {
   onSignOut: onSignOut,
   onBeginGame: onBeginGame,
   onBoxClick: onBoxClick,
-  isGameOver: isGameOver,
-  isGameWon: isGameWon
+  isGameOver: isGameOver
 }
