@@ -16510,20 +16510,18 @@ var theEvents = __webpack_require__(338);
 
 $(function () {
   // your JS code goes here
+  $('#sign-out-button').hide();
+  $('#change-password-form').hide();
+  $('#begin-game-button').hide();
+  $('#view-games-button').hide();
+  $('.box').hide();
   $('#new-user-form').on('submit', theEvents.onNewUser);
   $('#reg-user-form').on('submit', theEvents.onRegUser);
   $('#change-password-form').on('submit', theEvents.onChangePassword);
   $('#sign-out-button').on('click', theEvents.onSignOut);
   $('#begin-game-button').on('click', theEvents.onBeginGame);
-  $('#box0').on('click', theEvents.onBoxClick);
-  $('#box1').on('click', theEvents.onBoxClick);
-  $('#box2').on('click', theEvents.onBoxClick);
-  $('#box3').on('click', theEvents.onBoxClick);
-  $('#box4').on('click', theEvents.onBoxClick);
-  $('#box5').on('click', theEvents.onBoxClick);
-  $('#box6').on('click', theEvents.onBoxClick);
-  $('#box7').on('click', theEvents.onBoxClick);
-  $('#box8').on('click', theEvents.onBoxClick);
+  $('#view-games-button').on('click', theEvents.onViewGames);
+  $('.box').on('click', theEvents.onBoxClick);
 });
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(43)))
 
@@ -16545,7 +16543,6 @@ var onNewUser = function onNewUser(event) {
   var form = event.target;
 
   var data = getFormFields(form);
-  console.log('MDC data from onNewUser is', data);
 
   api.newUser(data).then(ui.onNewUserSuccess).catch(ui.onNewUserFailure);
 };
@@ -16556,7 +16553,6 @@ var onRegUser = function onRegUser(event) {
   var form = event.target;
 
   var data = getFormFields(form);
-  console.log('MDC data from onRegUser is ', data);
 
   api.regUser(data).then(ui.onRegUserSuccess).catch(ui.onRegUserFailure);
 };
@@ -16567,50 +16563,117 @@ var onChangePassword = function onChangePassword(event) {
   var form = event.target;
 
   var data = getFormFields(form);
-  console.log('MDC data from onChangePassword is', data);
 
   api.changePassword(data).then(ui.onChangePasswordSuccess).catch(ui.onChangePasswordFailure);
 };
 
 var onSignOut = function onSignOut(event) {
   event.preventDefault(); // extraneous
-
-  console.log('onSignOutfired!');
-
   api.signOut().then(ui.onSignOutSuccess).catch(ui.onSignOutFailure);
 };
 
-var onBeginGame = function onBeginGame() {
-  event.preventDefault(); // extraneous
-  console.log('onBeginGame is hitting!');
+var onViewGames = function onViewGames() {
+  event.preventDefault();
 
-  api.beginGame().then(ui.onBeginGameSuccess).catch(ui.onBeginGameFailure);
+  api.viewGames().then(ui.onViewGamesSuccess).catch(ui.onViewGamesFailure);
 };
 
+var gameEnd = false;
 var currentPlayer = 'X';
 store.currentPlayer = currentPlayer;
+//let gameOver = false //added from Aidan's code
+var board = ['', '', '', '', '', '', '', '', ''];
+//let gameOver = false - this line caused errors
 
 var onBoxClick = function onBoxClick(event) {
+  var target = $(event.target);
 
-  var clickedCell = event.target;
-
-  console.log('onBoxClick is hitting!');
-  console.log(clickedCell);
-
-  var clickedCellIndex = $(clickedCell).attr('data-cell-index');
-
-  console.log(clickedCellIndex);
-
-  $('#' + event.target.id).text(currentPlayer);
-
-  store.game.cells[clickedCellIndex] = currentPlayer;
-  console.log(store.game);
-
-  if (currentPlayer === 'X') {
-    currentPlayer = '0';
+  if (gameEnd) {
+    return;
   } else {
-    currentPlayer = 'X';
+    var clickedCellIndex = target.attr('data-cell-index');
+
+    if (target.text() === '') {
+      target.text(currentPlayer);
+
+      board[clickedCellIndex] = currentPlayer;
+
+      gameEnd = isGameOver(board);
+
+      api.updateGame(clickedCellIndex, currentPlayer, gameEnd).then(ui.onUpdateGameSuccess).catch(ui.onUpdateGameFailure);
+
+      if (currentPlayer === 'X') {
+        currentPlayer = '0';
+      } else {
+        currentPlayer = 'X';
+      }
+    } else if ($(event.target).text() !== '' && gameEnd === false) {
+      $('#message-area').text('Space Taken, try again.');
+    }
   }
+};
+
+//CODE BELOW for game logic and loop is directly attributable to Aiden Kenney, c. 2020 lol
+
+function myFunction() {
+  var isBlankSpace = true;
+  board.forEach(function (item) {
+    if (item === '') isBlankSpace = false;
+  });
+  return isBlankSpace;
+}
+
+var isGameOver = function isGameOver(gameBoard) {
+  if (gameBoard[0] === gameBoard[1] && gameBoard[0] === gameBoard[2] && gameBoard[0] !== '') {
+    displayResult(true);
+    return true;
+  } else if (gameBoard[3] === gameBoard[4] && gameBoard[3] === gameBoard[5] && gameBoard[3] !== '') {
+    displayResult(true);
+    return true;
+  } else if (gameBoard[6] === gameBoard[7] && gameBoard[6] === gameBoard[8] && gameBoard[6] !== '') {
+    displayResult(true);
+    return true;
+  } else if (gameBoard[0] === gameBoard[3] && gameBoard[0] === gameBoard[6] && gameBoard[0] !== '') {
+    displayResult(true);
+    return true;
+  } else if (gameBoard[1] === gameBoard[4] && gameBoard[1] === gameBoard[7] && gameBoard[1] !== '') {
+    displayResult(true);
+    return true;
+  } else if (gameBoard[2] === gameBoard[5] && gameBoard[2] === gameBoard[8] && gameBoard[2] !== '') {
+    displayResult(true);
+    return true;
+  } else if (gameBoard[0] === gameBoard[4] && gameBoard[0] === gameBoard[8] && gameBoard[0] !== '') {
+    displayResult(true);
+    return true;
+  } else if (gameBoard[2] === gameBoard[4] && gameBoard[2] === gameBoard[6] && gameBoard[2] !== '') {
+    displayResult(true);
+    return true;
+  } else if (myFunction()) {
+    displayResult(false);
+    return true;
+  } else {
+    return false;
+  }
+}; // ending brace for isGameOver function
+
+var displayResult = function displayResult(winorlose) {
+  var gameEndMessage = '';
+  if (winorlose === true) {
+    gameEndMessage = currentPlayer + ' won!';
+  } else {
+    gameEndMessage = ' Tie game. no winner.';
+  }
+  $('#message-area').text(gameEndMessage);
+};
+
+var onBeginGame = function onBeginGame() {
+  gameEnd = false;
+  api.beginGame().then(ui.onBeginGameSuccess).catch(ui.onBeginGameFailure);
+  $('.box').text('');
+  currentPlayer = 'X';
+  board = ['', '', '', '', '', '', '', '', ''];
+
+  $('#message-area').text(' New Game Has Begun!');
 };
 
 module.exports = {
@@ -16619,7 +16682,9 @@ module.exports = {
   onChangePassword: onChangePassword,
   onSignOut: onSignOut,
   onBeginGame: onBeginGame,
-  onBoxClick: onBoxClick
+  onBoxClick: onBoxClick,
+  isGameOver: isGameOver,
+  onViewGames: onViewGames
 };
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(43)))
 
@@ -16724,9 +16789,6 @@ var newUser = function newUser(data) {
 };
 
 var regUser = function regUser(data) {
-
-  console.log('regUser data is', data);
-
   return $.ajax({
     url: config.apiUrl + '/sign-in',
     method: 'POST',
@@ -16735,9 +16797,6 @@ var regUser = function regUser(data) {
 };
 
 var changePassword = function changePassword(data) {
-
-  console.log('changePassword data is', data);
-
   return $.ajax({
     url: config.apiUrl + '/change-password',
     method: 'PATCH',
@@ -16749,8 +16808,6 @@ var changePassword = function changePassword(data) {
 };
 
 var signOut = function signOut() {
-  console.log('signOut function hitting');
-
   return $.ajax({
     url: config.apiUrl + '/sign-out',
     method: 'DELETE',
@@ -16761,8 +16818,6 @@ var signOut = function signOut() {
 };
 
 var beginGame = function beginGame() {
-  console.log('beginGame hitting!');
-
   return $.ajax({
     url: config.apiUrl + '/games',
     method: 'POST',
@@ -16773,12 +16828,43 @@ var beginGame = function beginGame() {
   });
 };
 
+var viewGames = function viewGames() {
+  return $.ajax({
+    url: config.apiUrl + '/games',
+    method: 'GET',
+    headers: {
+      Authorization: 'Bearer ' + store.user.token
+    }
+  });
+};
+
+var updateGame = function updateGame(index, value, over) {
+  return $.ajax({
+    url: config.apiUrl + '/games/' + store.game._id,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Bearer ' + store.user.token
+    },
+    data: {
+      game: {
+        cell: {
+          index: index,
+          value: value
+        },
+        over: over
+      }
+    }
+  });
+};
+
 module.exports = {
   newUser: newUser,
   regUser: regUser,
   changePassword: changePassword,
   signOut: signOut,
-  beginGame: beginGame
+  beginGame: beginGame,
+  viewGames: viewGames,
+  updateGame: updateGame
 };
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(43)))
 
@@ -16815,54 +16901,78 @@ module.exports = {
 var store = __webpack_require__(95);
 
 var onNewUserSuccess = function onNewUserSuccess(response) {
-  $('#new-user-message').text('Thanks for signing up ' + response.user.email);
+  $('#message-area').text('Thanks for signing up ' + response.user.email);
   $('#new-user-form').trigger('reset');
+  $('#new-user-form').hide();
 };
 
 var onNewUserFailure = function onNewUserFailure(error) {
-  console.log('error is', error);
-  $('#new-user-message').text('Sign up failed, try again.');
+  $('#message-area').text('Sign up failed, try again.');
   $('#new-user-form').trigger('reset');
 };
 
 var onRegUserSuccess = function onRegUserSuccess(response) {
-  console.log('MDC2 response is', response);
   store.user = response.user;
-  $('#reg-user-message').text('Thanks for signing in, ' + response.user.email);
+  $('#message-area').text('Thanks for signing in, ' + response.user.email);
   $('#reg-user-form').trigger('reset');
+  $('#begin-game-button').show();
+  $('#view-games-button').show();
+  $('#change-password-form').show();
+  $('#sign-out-button').show();
 };
 
 var onRegUserFailure = function onRegUserFailure(error) {
-  console.log('error is ', error);
-  $('#reg-user-message').text('Sorry, sign in failed. Try again.');
+  $('#message-area').text('Sorry, sign in failed. Try again.');
   $('#reg-user-form').trigger('reset');
 };
 
 var onChangePasswordSuccess = function onChangePasswordSuccess() {
-  $('#change-password-message').text('Password changed successfully!');
+  $('#message-area').text('Password changed successfully!');
+  $('#change-password-form').trigger('reset');
 };
 
 var onChangePasswordFailure = function onChangePasswordFailure() {
-  $('#change-password-message').text('Error, could not change password.');
+  $('#message-area').text('Error, could not change password.');
+  $('#change-password-form').trigger('reset');
 };
 
 var onSignOutSuccess = function onSignOutSuccess() {
   $('#sign-out-message').text('Thanks, signed out successfully.');
+  $('#sign-out-button').hide();
+  $('#change-password-form').hide();
+  $('.box').hide();
+  $('#view-games-button').hide();
+  $('#begin-game-button').hide();
 };
 
 var onSignOutFailure = function onSignOutFailure() {
-  $('#sign-out-message').text('Error, could not sign you out. Try again.');
+  $('#message-area').text('Error, could not sign you out. Try again.');
 };
 
 var onBeginGameSuccess = function onBeginGameSuccess(response) {
-  console.log(response, 'onBeginGameSuccess is hitting!');
-  $('#begin-game-message').text('Game has begun!');
+  $('#message-area').text('Game has begun!');
   store.game = response.game;
-  console.log(store.game);
+  $('.box').show();
 };
 
 var onBeginGameFailure = function onBeginGameFailure() {
-  $('#begin-game-message').text('Error, game has not begun.  Try again.');
+  $('#message-area').text('Error, game has not begun.  Try again.');
+};
+
+var onUpdateGameSuccess = function onUpdateGameSuccess(response) {
+  store.game = response.game;
+};
+
+var onUpdateGameFailure = function onUpdateGameFailure(error) {
+  console.log('onUpdateGameFailure... ' + error);
+};
+
+var onViewGamesSuccess = function onViewGamesSuccess(response) {
+  $('#message-area').text('You have played ' + response.games.length + ' games.');
+};
+
+var onViewGamesFailure = function onViewGamesFailure(error) {
+  $('#message-area').text('Error.  Could not find games.  Try again.');
 };
 
 module.exports = {
@@ -16875,7 +16985,11 @@ module.exports = {
   onSignOutSuccess: onSignOutSuccess,
   onSignOutFailure: onSignOutFailure,
   onBeginGameSuccess: onBeginGameSuccess,
-  onBeginGameFailure: onBeginGameFailure
+  onBeginGameFailure: onBeginGameFailure,
+  onUpdateGameSuccess: onUpdateGameSuccess,
+  onUpdateGameFailure: onUpdateGameFailure,
+  onViewGamesSuccess: onViewGamesSuccess,
+  onViewGamesFailure: onViewGamesFailure
 };
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(43)))
 
