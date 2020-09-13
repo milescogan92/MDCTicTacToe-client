@@ -157,15 +157,16 @@ const displayResult = function (winorlose) {
   $('#message-area').text(gameEndMessage)
 }
 
-const onBeginGame = function (token) {
-  event.preventDefault() // extraneous
+const onBeginGame = function () {
   console.log('onBeginGame is hitting!')
+  gameEnd = false
   api.beginGame()
     .then(ui.onBeginGameSuccess)
     .catch(ui.onBeginGameFailure)
   $('.box').text('')
   currentPlayer = 'X'
-  gameEnd = false
+  board = ['', '', '', '', '', '', '', '', '']
+
   $('#message-area').text(' New Game Has Begun!')
 }
 

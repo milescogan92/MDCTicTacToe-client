@@ -48,7 +48,6 @@ const onSignOutSuccess = function () {
   $('.box').hide()
   $('#view-games-button').hide()
   $('#begin-game-button').hide()
-  $('#message-area').hide()
 }
 
 const onSignOutFailure = function () {
@@ -68,7 +67,7 @@ const onBeginGameFailure = function () {
 
 const onUpdateGameSuccess = function (response) {
   store.game = response.game
-  console.log('onUpdateGameSuccess is hitting ' + response)
+  console.log('onUpdateGameSuccess is hitting ' + store.game)
 }
 
 const onUpdateGameFailure = function (error) {
