@@ -64,10 +64,11 @@ const onUpdateGameFailure = function (error) {
 }
 
 const onViewGamesSuccess = function (response) {
+  $('#view-games-message').text('You have played ' + response.games.length + ' games.')
 }
 
 const onViewGamesFailure = function (error) {
-
+  $('#view-games-message').text('Error.  Could not find games.  Try again.')
 }
 
 
@@ -84,5 +85,7 @@ module.exports = {
   onBeginGameSuccess: onBeginGameSuccess,
   onBeginGameFailure: onBeginGameFailure,
   onUpdateGameSuccess: onUpdateGameSuccess,
-  onUpdateGameFailure: onUpdateGameFailure
+  onUpdateGameFailure: onUpdateGameFailure,
+  onViewGamesSuccess: onViewGamesSuccess,
+  onViewGamesFailure: onViewGamesFailure
 }

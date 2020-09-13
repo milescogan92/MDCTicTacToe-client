@@ -54,16 +54,6 @@ const onSignOut = function (event) {
     .catch(ui.onSignOutFailure)
 }
 
-const onBeginGame = function (token) {
-  event.preventDefault() // extraneous
-  console.log('onBeginGame is hitting!')
-  //gameOver = false - //took this line from Aidan, should work for me. but doesnt
-  //board = ['', '', '', '', '', '', '', '', ''] - //same as above line
-  api.beginGame() //added store.user.token on 9/5/2020 in this.
-    .then(ui.onBeginGameSuccess)
-    .catch(ui.onBeginGameFailure)
-}
-
 const onViewGames = function () {
   event.preventDefault()
   console.log('onViewGames is hitting!')
@@ -73,67 +63,110 @@ const onViewGames = function () {
     .catch(ui.onViewGamesFailure)
 }
 
+let gameEnd = false
 let currentPlayer = 'X'
 store.currentPlayer = currentPlayer
 //let gameOver = false //added from Aidan's code
 let board = ['', '', '', '', '', '', '', '', '']
 //let gameOver = false - this line caused errors
+
 const onBoxClick = function (event) {
-let gameEnd = isGameOver(board)
-let target = $(event.target)
+  let target = $(event.target)
 
-if (gameEnd) {
-  return
-} else {
-  const clickedCellIndex = target.attr('data-cell-index')
+  if (gameEnd) {
+    return
+  } else {
+    const clickedCellIndex = target.attr('data-cell-index')
 
-  if (target.text() === '') {
-    target.text(currentPlayer)
+    if (target.text() === '') {
+      target.text(currentPlayer)
 
-    board[clickedCellIndex] = currentPlayer
+      board[clickedCellIndex] = currentPlayer
 
-    api.updateGame(clickedCellIndex, currentPlayer, isGameOver(board))
-      .then(ui.onUpdateGameSuccess)
-      .catch(ui.onUpdateGameFailure)
+      gameEnd = isGameOver(board)
 
-    if (currentPlayer === 'X') {
+      api.updateGame(clickedCellIndex, currentPlayer, gameEnd)
+        .then(ui.onUpdateGameSuccess)
+        .catch(ui.onUpdateGameFailure)
+
+      if (currentPlayer === 'X') {
       currentPlayer = '0'
-    } else {
+      } else {
       currentPlayer = 'X'
+      }
     }
-  }
 
   else if ($(event.target).text() !== '' && gameEnd === false) {
-    $('#wrong-move-msg').text('Nice Move idiot')
+    $('#message-area').text('Nice Move idiot')
   }
 }
 }
-
 
 //CODE BELOW for game logic and loop is directly attributable to Aiden Kenney, c. 2020 lol
 
-
+function myFunction () {
+  let isBlankSpace = true
+  board.forEach(item => {
+    console.log(item)
+    if (item === '') isBlankSpace = false
+  })
+  return isBlankSpace
+}
 
 const isGameOver = function (gameBoard) {
   if (gameBoard[0] === gameBoard[1] && gameBoard[0] === gameBoard[2] && gameBoard[0] !== '') {
+    displayResult(true)
     return true
   } else if (gameBoard[3] === gameBoard[4] && gameBoard[3] === gameBoard[5] && gameBoard[3] !== '') {
+    displayResult(true)
     return true
   } else if (gameBoard[6] === gameBoard[7] && gameBoard[6] === gameBoard[8] && gameBoard[6] !== '') {
+    displayResult(true)
     return true
   } else if (gameBoard[0] === gameBoard[3] && gameBoard[0] === gameBoard[6] && gameBoard[0] !== '') {
+    displayResult(true)
     return true
   } else if (gameBoard[1] === gameBoard[4] && gameBoard[1] === gameBoard[7] && gameBoard[1] !== '') {
+    displayResult(true)
     return true
   } else if (gameBoard[2] === gameBoard[5] && gameBoard[2] === gameBoard[8] && gameBoard[2] !== '') {
+    displayResult(true)
     return true
   } else if (gameBoard[0] === gameBoard[4] && gameBoard[0] === gameBoard[8] && gameBoard[0] !== '') {
+    displayResult(true)
     return true
   } else if (gameBoard[2] === gameBoard[4] && gameBoard[2] === gameBoard[6] && gameBoard[2] !== '') {
+    displayResult(true)
     return true
-  } else {
+  } else if (myFunction()) {
+    displayResult(false)
+    return true
+  }
+  else {
     return false
   }
+} // ending brace for isGameOver function
+
+const displayResult = function (winorlose) {
+  let gameEndMessage = ''
+  if (winorlose === true) {
+    gameEndMessage = currentPlayer + 'won'
+  } else {
+    gameEndMessage = 'tie game. no winner.'
+  }
+  $('#message-area').text(gameEndMessage)
+}
+
+const onBeginGame = function (token) {
+  event.preventDefault() // extraneous
+  console.log('onBeginGame is hitting!')
+  api.beginGame()
+    .then(ui.onBeginGameSuccess)
+    .catch(ui.onBeginGameFailure)
+  $('.box').text('')
+  currentPlayer = 'X'
+  gameEnd = false
+  $('#message-area').text('New Game Has Begun!')
 }
 
 module.exports = {
@@ -143,5 +176,6 @@ module.exports = {
   onSignOut: onSignOut,
   onBeginGame: onBeginGame,
   onBoxClick: onBoxClick,
-  isGameOver: isGameOver
+  isGameOver: isGameOver,
+  onViewGames: onViewGames
 }

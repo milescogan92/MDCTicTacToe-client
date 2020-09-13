@@ -67,8 +67,7 @@ const viewGames = function () {
     method: 'GET',
     headers: {
       Authorization: 'Bearer ' + store.user.token
-    },
-    data: '{}'
+    }
   })
 }
 
