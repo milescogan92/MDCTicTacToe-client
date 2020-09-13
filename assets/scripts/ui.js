@@ -3,14 +3,14 @@
 const store = require('./store')
 
 const onNewUserSuccess = function (response) {
-  $('#new-user-message').text('Thanks for signing up ' + response.user.email)
+  $('#message-area').text('Thanks for signing up ' + response.user.email)
   $('#new-user-form').trigger('reset')
   $('#new-user-form').hide()
 }
 
 const onNewUserFailure = function (error) {
   console.log('error is', error)
-  $('#new-user-message').text('Sign up failed, try again.')
+  $('#message-area').text('Sign up failed, try again.')
   $('#new-user-form').trigger('reset')
 }
 
@@ -27,17 +27,17 @@ const onRegUserSuccess = function (response) {
 
 const onRegUserFailure = function (error) {
   console.log('error is ', error)
-  $('#reg-user-message').text('Sorry, sign in failed. Try again.')
+  $('#message-area').text('Sorry, sign in failed. Try again.')
   $('#reg-user-form').trigger('reset')
 }
 
 const onChangePasswordSuccess = function () {
-  $('#change-password-message').text('Password changed successfully!')
+  $('#message-area').text('Password changed successfully!')
   $('#change-password-form').trigger('reset')
 }
 
 const onChangePasswordFailure = function () {
-  $('#change-password-message').text('Error, could not change password.')
+  $('#message-area').text('Error, could not change password.')
   $('#change-password-form').trigger('reset')
 }
 
@@ -52,18 +52,18 @@ const onSignOutSuccess = function () {
 }
 
 const onSignOutFailure = function () {
-  $('#sign-out-message').text('Error, could not sign you out. Try again.')
+  $('#message-area').text('Error, could not sign you out. Try again.')
 }
 
 const onBeginGameSuccess = function (response) {
   console.log(response, 'onBeginGameSuccess is hitting!')
-  $('#begin-game-message').text('Game has begun!')
+  $('#message-area').text('Game has begun!')
   store.game = response.game
   $('.box').show()
 }
 
 const onBeginGameFailure = function () {
-  $('#begin-game-message').text('Error, game has not begun.  Try again.')
+  $('#message-area').text('Error, game has not begun.  Try again.')
 }
 
 const onUpdateGameSuccess = function (response) {
@@ -76,11 +76,11 @@ const onUpdateGameFailure = function (error) {
 }
 
 const onViewGamesSuccess = function (response) {
-  $('#view-games-message').text('You have played ' + response.games.length + ' games.')
+  $('#message-area').text('You have played ' + response.games.length + ' games.')
 }
 
 const onViewGamesFailure = function (error) {
-  $('#view-games-message').text('Error.  Could not find games.  Try again.')
+  $('#message-area').text('Error.  Could not find games.  Try again.')
 }
 
 
