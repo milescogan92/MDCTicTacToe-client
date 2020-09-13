@@ -97,7 +97,7 @@ const onBoxClick = function (event) {
     }
 
   else if ($(event.target).text() !== '' && gameEnd === false) {
-    $('#message-area').text('Nice Move idiot')
+    $('#message-area').text('Space Taken, try again.')
   }
 }
 }
@@ -150,9 +150,9 @@ const isGameOver = function (gameBoard) {
 const displayResult = function (winorlose) {
   let gameEndMessage = ''
   if (winorlose === true) {
-    gameEndMessage = currentPlayer + 'won'
+    gameEndMessage = currentPlayer + ' won!'
   } else {
-    gameEndMessage = 'tie game. no winner.'
+    gameEndMessage = ' Tie game. no winner.'
   }
   $('#message-area').text(gameEndMessage)
 }
@@ -166,7 +166,7 @@ const onBeginGame = function (token) {
   $('.box').text('')
   currentPlayer = 'X'
   gameEnd = false
-  $('#message-area').text('New Game Has Begun!')
+  $('#message-area').text(' New Game Has Begun!')
 }
 
 module.exports = {

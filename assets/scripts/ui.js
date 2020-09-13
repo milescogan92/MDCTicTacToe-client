@@ -5,6 +5,7 @@ const store = require('./store')
 const onNewUserSuccess = function (response) {
   $('#new-user-message').text('Thanks for signing up ' + response.user.email)
   $('#new-user-form').trigger('reset')
+  $('#new-user-form').hide()
 }
 
 const onNewUserFailure = function (error) {
@@ -16,8 +17,12 @@ const onNewUserFailure = function (error) {
 const onRegUserSuccess = function (response) {
   console.log('MDC2 response is', response)
   store.user = response.user
-  $('#reg-user-message').text('Thanks for signing in, ' + response.user.email)
+  $('#message-area').text('Thanks for signing in, ' + response.user.email)
   $('#reg-user-form').trigger('reset')
+  $('#begin-game-button').show()
+  $('#view-games-button').show()
+  $('#change-password-form').show()
+  $('#sign-out-button').show()
 }
 
 const onRegUserFailure = function (error) {
@@ -38,6 +43,12 @@ const onChangePasswordFailure = function () {
 
 const onSignOutSuccess = function () {
   $('#sign-out-message').text('Thanks, signed out successfully.')
+  $('#sign-out-button').hide()
+  $('#change-password-form').hide()
+  $('.box').hide()
+  $('#view-games-button').hide()
+  $('#begin-game-button').hide()
+  $('#message-area').hide()
 }
 
 const onSignOutFailure = function () {
@@ -48,6 +59,7 @@ const onBeginGameSuccess = function (response) {
   console.log(response, 'onBeginGameSuccess is hitting!')
   $('#begin-game-message').text('Game has begun!')
   store.game = response.game
+  $('.box').show()
 }
 
 const onBeginGameFailure = function () {

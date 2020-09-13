@@ -9,6 +9,11 @@ const theEvents = require('./events')
 
 $(() => {
   // your JS code goes here
+  $('#sign-out-button').hide()
+  $('#change-password-form').hide()
+  $('#begin-game-button').hide()
+  $('#view-games-button').hide()
+  $('.box').hide()
   $('#new-user-form').on('submit', theEvents.onNewUser)
   $('#reg-user-form').on('submit', theEvents.onRegUser)
   $('#change-password-form').on('submit', theEvents.onChangePassword)
