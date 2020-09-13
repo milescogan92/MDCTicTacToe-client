@@ -12,8 +12,6 @@ const newUser = function (data) {
 }
 
 const regUser = function (data) {
-  console.log('regUser data is', data)
-
   return $.ajax({
     url: config.apiUrl + '/sign-in',
     method: 'POST',
@@ -22,8 +20,6 @@ const regUser = function (data) {
 }
 
 const changePassword = function (data) {
-  console.log('changePassword data is', data)
-
   return $.ajax({
     url: config.apiUrl + '/change-password',
     method: 'PATCH',
@@ -35,8 +31,6 @@ const changePassword = function (data) {
 }
 
 const signOut = function () {
-  console.log('signOut function hitting')
-
   return $.ajax({
     url: config.apiUrl + '/sign-out',
     method: 'DELETE',
@@ -47,8 +41,6 @@ const signOut = function () {
 }
 
 const beginGame = function () {
-  console.log('beginGame hitting!')
-
   return $.ajax({
     url: config.apiUrl + '/games',
     method: 'POST',
@@ -60,8 +52,6 @@ const beginGame = function () {
 }
 
 const viewGames = function () {
-  console.log('viewGames hitting!')
-
   return $.ajax({
     url: config.apiUrl + '/games',
     method: 'GET',
@@ -72,7 +62,6 @@ const viewGames = function () {
 }
 
 const updateGame = function (index, value, over) {
-  console.log(over)
   return $.ajax({
     url: config.apiUrl + '/games/' + store.game._id,
     method: 'PATCH',

@@ -9,13 +9,11 @@ const onNewUserSuccess = function (response) {
 }
 
 const onNewUserFailure = function (error) {
-  console.log('error is', error)
   $('#message-area').text('Sign up failed, try again.')
   $('#new-user-form').trigger('reset')
 }
 
 const onRegUserSuccess = function (response) {
-  console.log('MDC2 response is', response)
   store.user = response.user
   $('#message-area').text('Thanks for signing in, ' + response.user.email)
   $('#reg-user-form').trigger('reset')
@@ -26,7 +24,6 @@ const onRegUserSuccess = function (response) {
 }
 
 const onRegUserFailure = function (error) {
-  console.log('error is ', error)
   $('#message-area').text('Sorry, sign in failed. Try again.')
   $('#reg-user-form').trigger('reset')
 }
@@ -55,7 +52,6 @@ const onSignOutFailure = function () {
 }
 
 const onBeginGameSuccess = function (response) {
-  console.log(response, 'onBeginGameSuccess is hitting!')
   $('#message-area').text('Game has begun!')
   store.game = response.game
   $('.box').show()
@@ -67,7 +63,6 @@ const onBeginGameFailure = function () {
 
 const onUpdateGameSuccess = function (response) {
   store.game = response.game
-  console.log('onUpdateGameSuccess is hitting ' + store.game)
 }
 
 const onUpdateGameFailure = function (error) {

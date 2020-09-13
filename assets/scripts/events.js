@@ -11,7 +11,6 @@ const onNewUser = function (event) {
   const form = event.target
 
   const data = getFormFields(form)
-  console.log('MDC data from onNewUser is', data)
 
   api.newUser(data)
     .then(ui.onNewUserSuccess)
@@ -24,7 +23,6 @@ const onRegUser = function (event) {
   const form = event.target
 
   const data = getFormFields(form)
-  console.log('MDC data from onRegUser is ', data)
 
   api.regUser(data)
     .then(ui.onRegUserSuccess)
@@ -37,7 +35,6 @@ const onChangePassword = function (event) {
   const form = event.target
 
   const data = getFormFields(form)
-  console.log('MDC data from onChangePassword is', data)
 
   api.changePassword(data)
     .then(ui.onChangePasswordSuccess)
@@ -46,9 +43,6 @@ const onChangePassword = function (event) {
 
 const onSignOut = function (event) {
   event.preventDefault() // extraneous
-
-  console.log('onSignOutfired!')
-
   api.signOut()
     .then(ui.onSignOutSuccess)
     .catch(ui.onSignOutFailure)
@@ -56,7 +50,6 @@ const onSignOut = function (event) {
 
 const onViewGames = function () {
   event.preventDefault()
-  console.log('onViewGames is hitting!')
 
   api.viewGames()
     .then(ui.onViewGamesSuccess)
@@ -107,7 +100,6 @@ const onBoxClick = function (event) {
 function myFunction () {
   let isBlankSpace = true
   board.forEach(item => {
-    console.log(item)
     if (item === '') isBlankSpace = false
   })
   return isBlankSpace
@@ -158,7 +150,6 @@ const displayResult = function (winorlose) {
 }
 
 const onBeginGame = function () {
-  console.log('onBeginGame is hitting!')
   gameEnd = false
   api.beginGame()
     .then(ui.onBeginGameSuccess)
