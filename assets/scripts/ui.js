@@ -21,6 +21,8 @@ const onRegUserSuccess = function (response) {
   $('#view-games-button').show()
   $('#change-password-form').show()
   $('#sign-out-button').show()
+  $('#reg-user-form').hide()
+  $('#new-user-form').hide()
 }
 
 const onRegUserFailure = function (error) {
@@ -45,6 +47,8 @@ const onSignOutSuccess = function () {
   $('.box').hide()
   $('#view-games-button').hide()
   $('#begin-game-button').hide()
+  $('#reg-user-form').show()
+  $('#new-user-form').show()
 }
 
 const onSignOutFailure = function () {
