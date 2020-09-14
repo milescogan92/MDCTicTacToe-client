@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Example</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+    <body>
+      <h1>Welcome to Miles' LIFE CHANGING Tic-Tac-Toe</h1>
+
+      <input type='button' id='sign-out-button' value='Log Me Out!'>
+
+      <form id='new-user-form'>
+        <fieldset>
+          <legend>New User Registration:</legend>
+
+            <label for='new-user-email'>Email</label>
+            <input id='new-user-email' type='text' placeholder='email' name='credentials[email]'>
+
+            <label for='new-user-password'>Password</label>
+            <input id='new-user-password' type='password' placeholder='password' name='credentials[password]'>
+
+            <label for='new-user-password_confirmation'>Confirm Password</label>
+            <input id='new-user-password_confirmation' type='password' placeholder='confirm password' name='credentials[password_confirmation]'>
+
+            <input type='submit' value='Sign Up!'>
+        </fieldset>
+      </form>
+
+      <form id='reg-user-form'>
+        <fieldset>
+          <legend>Registered User Sign In:</legend>
+
+            <label for='reg-user-email'>Email</label>
+            <input id='reg-user-email' type='text' placeholder='email' name='credentials[email]'>
+
+            <label for='reg-user-password'>Password</label>
+            <input id='reg-user-password' type='password' placeholder='password' name='credentials[password]'>
+
+
+            <input type='submit' value='Sign In'>
+          </fieldset>
+        </form>
+
+        <form id='change-password-form'>
+          <fieldset>
+            <legend>Change Password:</legend>
+
+              <label for='change-password-password'>Old Password</label>
+              <input id='change-password-password' type='password' placeholder='old password' name='passwords[old]'>
+
+              <label for='change-password-password_confirmation'>New Password</label>
+              <input id='change-password-password_confirmation' type='password' placeholder='new password' name='passwords[new]'>
+
+              <input type='submit' value='Change Password'>
+          </fieldset>
+        </form>
+
+
+        <button type='button' id='begin-game-button'>Start or Reset Game!</button>
+
+        <input type='button' id='view-games-button' value='View Number of Games'>
+
+        <p id='message-area'></p>
+
+
+
+<!-- code along here for board! -->
+      <div class='container'>
+        <div class='row board h-100'>
+          <div class='col-4 box' data-cell-index=0></div>
+          <div class='col-4 box' data-cell-index=1></div>
+          <div class='col-4 box' data-cell-index=2></div>
+          <div class='col-4 box' data-cell-index=3></div>
+          <div class='col-4 box' data-cell-index=4></div>
+          <div class='col-4 box' data-cell-index=5></div>
+          <div class='col-4 box' data-cell-index=6></div>
+          <div class='col-4 box' data-cell-index=7></div>
+          <div class='col-4 box' data-cell-index=8></div>
+        </div>
+      </div>
+
+    </body>
+</html>
