@@ -16919,6 +16919,8 @@ var onRegUserSuccess = function onRegUserSuccess(response) {
   $('#view-games-button').show();
   $('#change-password-form').show();
   $('#sign-out-button').show();
+  $('#reg-user-form').hide();
+  $('#new-user-form').hide();
 };
 
 var onRegUserFailure = function onRegUserFailure(error) {
@@ -16943,6 +16945,8 @@ var onSignOutSuccess = function onSignOutSuccess() {
   $('.box').hide();
   $('#view-games-button').hide();
   $('#begin-game-button').hide();
+  $('#reg-user-form').show();
+  $('#new-user-form').show();
 };
 
 var onSignOutFailure = function onSignOutFailure() {
